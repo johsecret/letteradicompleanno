@@ -10,12 +10,45 @@
             text-align: center;
             padding: 50px;
         }
+        #countdown {
+            font-size: 2em;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <h1>Lettera compleanno?</h1>
     <p>Cosa ci fai qui?? Non è ancora il tuo compleanno.<br>
     Torna il 19 febbraio.<br>
+    <p id="countdown"></p>
     <button onclick="document.location='https://johsecret.github.io/veralettera/'">Go back</button></p>
+
+    <script>
+        // Set the target date
+        const targetDate = new Date("February 18, 2025 23:59:59").getTime();
+
+        // Update the countdown every second
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+
+            // Calculate days, hours, minutes, seconds
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById("countdown").innerHTML = 
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            // Stop the countdown when the date is reached
+            if (timeLeft < 0) {
+                clearInterval(countdown);
+                document.getElementById("countdown").innerHTML = "Auguri!!!";
+            }
+        }, 1000);
+    </script>
+
 </body>
 </html>
